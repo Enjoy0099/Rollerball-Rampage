@@ -5,6 +5,7 @@ public static class NameManager
 
     public static string PLAYER_TAG = "Player";
     public static string ENEMY_TAG = "Enemy";
+    public static string POWERUP_TAG = "PowerUp";
     public static string FOCALPOINT_TAG = "FocalPoint";
 
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -26,6 +27,11 @@ public class Player : MonoBehaviour
         mybody.AddForce(focalPoint.transform.forward * forwardInput * speed * Time.deltaTime, ForceMode.Impulse); 
 
         powerUpIndicator.transform.position = transform.position + new Vector3(0f, -0.6f, 0f);
+
+        if(transform.position.z < -10f)
+        {
+            EditorApplication.isPlaying = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

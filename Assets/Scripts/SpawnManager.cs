@@ -6,7 +6,7 @@ public class SpawnManager : MonoBehaviour
 {
 
     public GameObject[] enemyPrefab;
-    public GameObject powerUpPrefab;
+    public GameObject[] powerUpPrefab;
 
     private float spawnRange = 9f;
 
@@ -36,8 +36,9 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnPowerUp()
     {
+        int randomPowerUp = Random.Range(0, powerUpPrefab.Length);
         Vector3 Pos = GenerateSpawnPosition() + new Vector3(0f, -0.1f, 0f);
-        Instantiate(powerUpPrefab, Pos, powerUpPrefab.transform.rotation);
+        Instantiate(powerUpPrefab[randomPowerUp], Pos, powerUpPrefab[randomPowerUp].transform.rotation);
     }
 
     void SpawnEnemyWave(int enemiesToSpawn)

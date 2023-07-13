@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
     public bool hasPowerUp = false;
     private float powerUpForce = 15f;
+    public bool fireUp = false;
 
     private void Start()
     {
@@ -28,7 +29,7 @@ public class Player : MonoBehaviour
 
         powerUpIndicator.transform.position = transform.position + new Vector3(0f, -0.6f, 0f);
 
-        if(transform.position.z < -10f)
+        if(transform.position.y < -10f)
         {
             EditorApplication.isPlaying = false;
         }
@@ -43,6 +44,12 @@ public class Player : MonoBehaviour
             powerUpIndicator.SetActive(true);
             StartCoroutine(PowerUpCountdownRoutine());
         }
+        else if(other.CompareTag(NameManager.FIREUP_TAG))
+        {
+            fireUp = true;
+            Destroy(other.gameObject);
+            StartCoroutine(FireUpCountdownRoutine());
+        }
     }
 
     IEnumerator PowerUpCountdownRoutine()
@@ -50,6 +57,12 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(7);
         hasPowerUp = false;
         powerUpIndicator.SetActive(false);
+    }
+
+    IEnumerator FireUpCountdownRoutine()
+    {
+        yield return new WaitForSeconds(3);
+        fireUp = false;
     }
 
     private void OnCollisionEnter(Collision collision)

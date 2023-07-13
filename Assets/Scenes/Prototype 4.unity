@@ -754,6 +754,7 @@ MonoBehaviour:
   - {fileID: 5962894223149130054, guid: 2aaa7b1a411651e46a876ddca56db312, type: 3}
   - {fileID: 3771737734245246569, guid: d59db567e9d2aa64f8e3044d9d928f15, type: 3}
   - {fileID: 5717500106436481131, guid: a887b4c6bfc1ea4428333bafd1b23876, type: 3}
+  mini_BossPrefab: {fileID: 7816101000907195067, guid: c062df4e9c6673b4d9c1bded06cd9f13, type: 3}
   enemyCount: 0
   waveNumber: 1
 --- !u!1 &3356316518137844409

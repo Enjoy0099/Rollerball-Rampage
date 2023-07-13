@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
 
     private void Awake()
     {
-        speed = 5f;
+        speed = 10f;
         playerScript = FindObjectOfType<Player>();
     }
 

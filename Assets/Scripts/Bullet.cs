@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    Rigidbody bulletrb;
     public GameObject enemy;
     private Player playerScript;
     float speed;
@@ -10,7 +9,6 @@ public class Bullet : MonoBehaviour
 
     private void Awake()
     {
-        bulletrb = GetComponent<Rigidbody>();
         speed = 5f;
         playerScript = FindObjectOfType<Player>();
     }

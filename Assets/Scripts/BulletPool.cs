@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class BulletPool : MonoBehaviour
 {
@@ -17,7 +15,7 @@ public class BulletPool : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag(NameManager.PLAYER_TAG);
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 150; i++)
         {
             GameObject newbullet = Instantiate(bulletPrefab, player.transform.position, bulletPrefab.transform.rotation);
             newbullet.transform.parent = transform;

@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     public float enemySpeed = 5f;
     private Rigidbody enemyBody;
     private GameObject player;
+    Player playerScript;
     private int AlmightyPush;
 
     public bool power_Speed = false;
@@ -18,7 +19,7 @@ public class Enemy : MonoBehaviour
     {
         enemyBody = GetComponent<Rigidbody>();
         player = GameObject.FindWithTag(NameManager.PLAYER_TAG);
-
+        playerScript = player.GetComponent<Player>();
         if (power_Speed)
             enemySpeed *= 2;
         else if (power_size)
@@ -61,6 +62,13 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if(Vector3.Distance(transform.position, player.transform.position) < playerScript.smashRange && playerScript.almighty_Push)
+        {
+            Vector3 awayDirection = transform.position - player.transform.position;
+
+            enemyBody.AddForce(awayDirection * 5, ForceMode.Impulse);
+        }
+        
     }
 
 
@@ -72,6 +80,11 @@ public class Enemy : MonoBehaviour
             Vector3 awayDirection = collision.gameObject.transform.position - enemyBody.transform.position;
 
             playerBody.AddForce(awayDirection * AlmightyPush, ForceMode.Impulse);
+        }
+
+        if (collision.gameObject.CompareTag(NameManager.PLAYER_TAG) && playerScript.almighty_Push)
+        {
+            Destroy(gameObject);
         }
     }
 }

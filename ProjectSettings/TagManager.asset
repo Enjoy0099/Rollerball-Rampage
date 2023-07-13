@@ -9,6 +9,7 @@ TagManager:
   - PowerUp
   - Ground
   - FireUp
+  - Smash
   layers:
   - Default
   - TransparentFX

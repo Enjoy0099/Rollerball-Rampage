@@ -597,10 +597,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f058be2d1e6b644ca0dec4be898789a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  speed: 7
   powerUpIndicator: {fileID: 3356316518137844409}
   hasPowerUp: 0
   fireUp: 0
+  smashPower: 0
+  smashRange: 5
+  almighty_Push: 0
 --- !u!1001 &1403545340
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -615,6 +618,10 @@ PrefabInstance:
     - target: {fileID: 1301643505922104, guid: 961be46ca9a355943ae3f65c47741bb0, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1301643505922104, guid: 961be46ca9a355943ae3f65c47741bb0, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 4625923886776944, guid: 961be46ca9a355943ae3f65c47741bb0, type: 3}
       propertyPath: m_RootOrder
@@ -738,12 +745,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab:
-  - {fileID: 9003093395021220609, guid: 57c1da37cceb134488d477b36c49dac6, type: 3}
-  - {fileID: 1931292690949363329, guid: 01edf9748de8bbb4180b1e2f43c382c5, type: 3}
-  - {fileID: 946187237602839902, guid: 7c477095cb4f6f940afbdfc48306d106, type: 3}
-  - {fileID: 7302849971733359888, guid: 67955c8c71e791d48a0c67fe90db24a1, type: 3}
   - {fileID: 4118248647367574811, guid: 4e2f20e4f35690b42950611d5e5ef06c, type: 3}
+  - {fileID: 7302849971733359888, guid: 67955c8c71e791d48a0c67fe90db24a1, type: 3}
+  - {fileID: 946187237602839902, guid: 7c477095cb4f6f940afbdfc48306d106, type: 3}
+  - {fileID: 1931292690949363329, guid: 01edf9748de8bbb4180b1e2f43c382c5, type: 3}
+  - {fileID: 9003093395021220609, guid: 57c1da37cceb134488d477b36c49dac6, type: 3}
   powerUpPrefab:
+  - {fileID: 5962894223149130054, guid: 2aaa7b1a411651e46a876ddca56db312, type: 3}
+  - {fileID: 3771737734245246569, guid: d59db567e9d2aa64f8e3044d9d928f15, type: 3}
   - {fileID: 5717500106436481131, guid: a887b4c6bfc1ea4428333bafd1b23876, type: 3}
   enemyCount: 0
   waveNumber: 1

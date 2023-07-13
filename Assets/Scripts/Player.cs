@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,6 +13,11 @@ public class Player : MonoBehaviour
     public bool hasPowerUp = false;
     private float powerUpForce = 15f;
     public bool fireUp = false;
+    
+    float jumpPower = 20f;
+    public bool smashPower = false;
+    public float smashRange = 5f;
+    public bool almighty_Push = false;
 
     private void Start()
     {
@@ -27,12 +31,24 @@ public class Player : MonoBehaviour
 
         mybody.AddForce(focalPoint.transform.forward * forwardInput * speed * Time.deltaTime, ForceMode.Impulse); 
 
-        powerUpIndicator.transform.position = transform.position + new Vector3(0f, -0.6f, 0f);
+        powerUpIndicator.transform.position = transform.position + new Vector3(0f, -0.6f, 0f);    
 
         if(transform.position.y < -10f)
         {
             EditorApplication.isPlaying = false;
         }
+
+        /*if(Input.GetKeyDown(KeyCode.Space) && !smashPower)
+        {
+            Smash();
+        }*/
+
+        if(transform.position.y > 4f)
+        {
+            HitGroundFullForce(smashPower);
+        }
+
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,6 +66,11 @@ public class Player : MonoBehaviour
             Destroy(other.gameObject);
             StartCoroutine(FireUpCountdownRoutine());
         }
+        else if (other.CompareTag(NameManager.SMASH_TAG))
+        {
+            Smash();
+            Destroy(other.gameObject);
+        }
     }
 
     IEnumerator PowerUpCountdownRoutine()
@@ -65,6 +86,14 @@ public class Player : MonoBehaviour
         fireUp = false;
     }
 
+    void Smash()
+    {
+        mybody.velocity = Vector3.zero;
+        mybody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+        gameObject.GetComponent<SphereCollider>().material.bounciness = 0f;
+        smashPower = true;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag(NameManager.ENEMY_TAG) && hasPowerUp)
@@ -74,5 +103,26 @@ public class Player : MonoBehaviour
 
             enemyBody.AddForce(awayDirection * powerUpForce, ForceMode.Impulse);
         }
+        if(collision.gameObject.CompareTag(NameManager.GROUND_TAG) && smashPower)
+        {
+            almighty_Push = true;
+            smashPower = false;
+            mybody.velocity = Vector3.zero;
+            mybody.mass = 1f;
+            gameObject.GetComponent<SphereCollider>().material.bounciness = 1f;
+            Invoke("Almighty_Push", 0.2f);
+        }
     }
+
+    void HitGroundFullForce(bool smash)
+    {
+        if(smash)
+            mybody.AddForce(Vector3.down * (jumpPower ), ForceMode.Impulse);
+    }
+
+    void Almighty_Push()
+    {
+        almighty_Push = false;
+    }
+
 }

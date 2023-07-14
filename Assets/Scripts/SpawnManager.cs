@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    GameUI gameUI_Script;
 
     public GameObject[] enemyPrefab;
     public GameObject[] powerUpPrefab;
@@ -16,9 +17,15 @@ public class SpawnManager : MonoBehaviour
 
     bool mini_Boss;
 
+    private void Awake()
+    {
+        gameUI_Script = FindObjectOfType<GameUI>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        gameUI_Script.scoreCount_Text.text = waveNumber.ToString("00");
         SpawnEnemyWave(waveNumber);
         SpawnPowerUp();
     }
@@ -32,6 +39,13 @@ public class SpawnManager : MonoBehaviour
         {
             mini_Boss = false;
             waveNumber++;
+            if (waveNumber == 11)
+            {
+                gameUI_Script.WinGame();
+                Time.timeScale = 0f;
+            }
+            gameUI_Script.scoreCount_Text.text = waveNumber.ToString("00");
+
             SpawnPowerUp();
 
             if(waveNumber % 5 == 0)

@@ -19,10 +19,14 @@ public class Player : MonoBehaviour
     public float smashRange = 5f;
     public bool almighty_Push = false;
 
+    GameUI gameUI_Script;
+
     private void Start()
     {
         mybody = GetComponent<Rigidbody>();
+        gameUI_Script = FindObjectOfType<GameUI>();
         focalPoint = GameObject.FindWithTag(NameManager.FOCALPOINT_TAG);
+        Time.timeScale = 1f;
     }
 
     private void Update()
@@ -35,7 +39,8 @@ public class Player : MonoBehaviour
 
         if(transform.position.y < -10f)
         {
-            EditorApplication.isPlaying = false;
+            gameUI_Script.LoseGame();
+            Time.timeScale = 0f;
         }
 
         /*if(Input.GetKeyDown(KeyCode.Space) && !smashPower)
